@@ -21,6 +21,25 @@ def is_dangerous(line):
     return False
 
 
+def check_luhn(number):
+    digits = list(number)
+    digits.reverse()
+    total = 0
+    i = 0
+    for d in digits:
+        d = int(d)
+        if i % 2 == 1:
+            d = d * 2
+            if d > 9:
+                d = d - 9
+        total = total + d
+        i = i + 1
+    if total % 10 == 0:
+        return True
+    else:
+        return False
+
+
 def get_email_type(email):
     email = email.lower()
     if email.endswith("@alumni.alueducation.com"):
@@ -43,25 +62,6 @@ def hide_email(email):
     else:
         hidden = name[0:2] + "*" * (len(name) - 2)
     return hidden + "@" + domain
-
-
-def check_luhn(number):
-    digits = list(number)
-    digits.reverse()
-    total = 0
-    i = 0
-    for d in digits:
-        d = int(d)
-        if i % 2 == 1:
-            d = d * 2
-            if d > 9:
-                d = d - 9
-        total = total + d
-        i = i + 1
-    if total % 10 == 0:
-        return True
-    else:
-        return False
 
 
 def hide_card(number):
@@ -96,10 +96,6 @@ for line in safe_lines:
     for e in found:
         emails.append({"masked": hide_email(e), "type": get_email_type(e)})
 
-print("Emails found: " + str(len(emails)))
-for e in emails:
-    print("  " + e["masked"] + " (" + e["type"] + ")")
-
 cards = []
 rejected_cards = 0
 for line in safe_lines:
@@ -113,11 +109,6 @@ for line in safe_lines:
         else:
             rejected_cards = rejected_cards + 1
 
-print("")
-print("Valid cards: " + str(len(cards)) + " (rejected " + str(rejected_cards) + ")")
-for c in cards:
-    print("  " + c)
-
 phones = []
 for line in safe_lines:
     found = re.findall(phone_pattern, line)
@@ -130,11 +121,6 @@ for line in safe_lines:
             continue
         phones.append(p)
 
-print("")
-print("Phones found: " + str(len(phones)))
-for p in phones:
-    print("  " + p)
-
 urls = []
 for line in safe_lines:
     found = re.findall(url_pattern, line)
@@ -143,7 +129,38 @@ for line in safe_lines:
             continue
         urls.append(u)
 
+print("----- SUMMARY -----")
+print("Emails found: " + str(len(emails)))
+for e in emails:
+    print("  " + e["masked"] + " (" + e["type"] + ")")
+
+print("")
+print("Valid cards: " + str(len(cards)) + " (rejected " + str(rejected_cards) + ")")
+for c in cards:
+    print("  " + c)
+
+print("")
+print("Phones found: " + str(len(phones)))
+for p in phones:
+    print("  " + p)
+
 print("")
 print("URLs found: " + str(len(urls)))
 for u in urls:
     print("  " + u)
+
+results = {
+    "lines_skipped_as_unsafe": skipped,
+    "emails": emails,
+    "credit_cards_valid": cards,
+    "credit_cards_rejected_count": rejected_cards,
+    "phone_numbers": phones,
+    "urls": urls
+}
+
+out = open(output_path, "w", encoding="utf-8")
+json.dump(results, out, indent=2)
+out.close()
+
+print("")
+print("Done, saved to " + output_path)
