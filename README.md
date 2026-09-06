@@ -35,7 +35,7 @@ the full result to output/sample-output.json.
 
 ## How the regex works
 
-Emails - EMAIL_REGEX matches name@domain.tld. get_email_type() checks
+Emails - EMAIL_REGEX matches `name@domain.tld`. get_email_type() checks
 alumni/si endings before the plain alueducation.com check, since those
 addresses technically also end in alueducation.com.
 
