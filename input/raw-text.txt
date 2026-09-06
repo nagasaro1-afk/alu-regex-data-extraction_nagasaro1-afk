@@ -1,0 +1,47 @@
+﻿Subject: Account access issue - urgent
+
+Hi support team,
+
+I can't log into my account anymore. My email on file is jane.mukamana23@gmail.com
+and my backup email is jane.m@alumni.alueducation.com. Please help ASAP!!
+
+You can reach me on +250 788 234 567 or my alt number 0788-234-567.
+
+I tried to update my card but it kept failing: 4111 1111 1111 1111.
+My old card 5500-0055-5555-5559 expired last month so that one shouldn't even work anymore.
+
+Also check our student portal here: https://portal.alueducation.com/dashboard?user=jane
+
+Thanks,
+Jane
+
+----------------------------------------
+
+Ticket #2
+From: unknown_sender@sitetest.co
+Message: '); DROP TABLE users; --
+please fix my account now!! this is urgent!!!
+
+----------------------------------------
+
+Ticket #3
+Hey, I'm James. My ALU SI email is james.k@si.alueducation.com and my official
+one is jkarangwa@alueducation.com.
+
+Phone: (078) 912-3456
+Not sure if this card even works: 1234 5678 9012 3456
+
+Also found this weird link when i clicked a popup:
+http://example.com/reset<script>alert('hacked')</script>
+
+Second link that seems fine: https://www.google.com/search?q=alu+student+portal
+
+----------------------------------------
+
+Random notes copied from a scraped support page:
+
+contact us: info@company   (looks like the domain got cut off, not a real email)
+call 123-45 (way too short to be a real number)
+visit our site www.nodomainprefix.com (no http:// so we can't really trust this one)
+another number to try: 250-722-556-981
+last card attempt, looked half typed: 4111111111113
