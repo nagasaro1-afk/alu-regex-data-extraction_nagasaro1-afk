@@ -10,6 +10,16 @@ card_pattern = r"\b(?:\d[ -]?){13,19}\b"
 phone_pattern = r"(?:\+?\d{1,3}[\s.-]?)?(?:\(?\d{2,4}\)?[\s.-]?){1,2}\d{3}[\s.-]?\d{3,4}"
 url_pattern = r"https?://[^\s\"'<>]+"
 
+bad_stuff = ["<script", "<iframe", "javascript:", "onerror=", "drop table", "union select", "shutdown", "--"]
+
+
+def is_dangerous(line):
+    line_lower = line.lower()
+    for word in bad_stuff:
+        if word in line_lower:
+            return True
+    return False
+
 
 def get_email_type(email):
     email = email.lower()
@@ -70,8 +80,18 @@ if len(text) > max_size:
 
 lines = text.split("\n")
 
-emails = []
+safe_lines = []
+skipped = 0
 for line in lines:
+    if is_dangerous(line):
+        skipped = skipped + 1
+    else:
+        safe_lines.append(line)
+
+print("Skipped " + str(skipped) + " unsafe line(s)")
+
+emails = []
+for line in safe_lines:
     found = re.findall(email_pattern, line)
     for e in found:
         emails.append({"masked": hide_email(e), "type": get_email_type(e)})
@@ -82,7 +102,7 @@ for e in emails:
 
 cards = []
 rejected_cards = 0
-for line in lines:
+for line in safe_lines:
     found = re.findall(card_pattern, line)
     for match in found:
         clean_number = match.replace(" ", "").replace("-", "")
@@ -99,7 +119,7 @@ for c in cards:
     print("  " + c)
 
 phones = []
-for line in lines:
+for line in safe_lines:
     found = re.findall(phone_pattern, line)
     for p in found:
         p = p.strip()
@@ -116,9 +136,12 @@ for p in phones:
     print("  " + p)
 
 urls = []
-for line in lines:
+for line in safe_lines:
     found = re.findall(url_pattern, line)
-    urls.extend(found)
+    for u in found:
+        if is_dangerous(u):
+            continue
+        urls.append(u)
 
 print("")
 print("URLs found: " + str(len(urls)))
