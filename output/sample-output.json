@@ -1,0 +1,40 @@
+﻿{
+  "lines_skipped_as_unsafe": 5,
+  "emails": [
+    {
+      "masked": "ja*************@gmail.com",
+      "type": "regular email"
+    },
+    {
+      "masked": "ja****@alumni.alueducation.com",
+      "type": "ALU alumni email"
+    },
+    {
+      "masked": "un************@sitetest.co",
+      "type": "regular email"
+    },
+    {
+      "masked": "ja*****@si.alueducation.com",
+      "type": "ALU SI email"
+    },
+    {
+      "masked": "jk*******@alueducation.com",
+      "type": "ALU official email"
+    }
+  ],
+  "credit_cards_valid": [
+    "**** **** **** 1111",
+    "**** **** **** 5559"
+  ],
+  "credit_cards_rejected_count": 2,
+  "phone_numbers": [
+    "+250 788 234 567",
+    "0788-234-567",
+    "(078) 912-3456",
+    "250-722-556-981"
+  ],
+  "urls": [
+    "https://portal.alueducation.com/dashboard?user=jane",
+    "https://www.google.com/search?q=alu+student+portal"
+  ]
+}

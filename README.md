@@ -60,10 +60,3 @@ max_size stops the regex from running on a huge file.
 Emails and card numbers are masked everywhere, console and json.
 Phone numbers and urls arent masked since theyre not sensitive the
 same way.
-
-## Known limits
-
-Luhn check confirms structure, not that a card is real or active.
-Phone regex doesnt catch every format, just the ones i tested.
-The bad_stuff list is basic, its showing the idea not a full
-production sanitizer.
