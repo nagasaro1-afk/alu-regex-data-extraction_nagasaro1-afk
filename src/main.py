@@ -7,6 +7,8 @@ max_size = 50000
 
 email_pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
 card_pattern = r"\b(?:\d[ -]?){13,19}\b"
+phone_pattern = r"(?:\+?\d{1,3}[\s.-]?)?(?:\(?\d{2,4}\)?[\s.-]?){1,2}\d{3}[\s.-]?\d{3,4}"
+url_pattern = r"https?://[^\s\"'<>]+"
 
 
 def get_email_type(email):
@@ -95,3 +97,30 @@ print("")
 print("Valid cards: " + str(len(cards)) + " (rejected " + str(rejected_cards) + ")")
 for c in cards:
     print("  " + c)
+
+phones = []
+for line in lines:
+    found = re.findall(phone_pattern, line)
+    for p in found:
+        p = p.strip()
+        just_digits = re.sub(r"\D", "", p)
+        if len(just_digits) < 7:
+            continue
+        if p.isdigit() and len(p) > 10:
+            continue
+        phones.append(p)
+
+print("")
+print("Phones found: " + str(len(phones)))
+for p in phones:
+    print("  " + p)
+
+urls = []
+for line in lines:
+    found = re.findall(url_pattern, line)
+    urls.extend(found)
+
+print("")
+print("URLs found: " + str(len(urls)))
+for u in urls:
+    print("  " + u)
